@@ -1,2 +1,2 @@
-# scapy2json
-Scapy packet to json
+# scapy2pickle
+Scapy packet to pickle
