@@ -1,17 +1,15 @@
 from scapy.packet import NoPayload
-import pickle
 from collections import OrderedDict
 
-__all__ = ['to_pickle', 'Packet2Pickle']
+
+__all__ = ['to_dict', 'Packet2Dict']
 
 
-def to_pickle(pkt):
-    return Packet2Pickle(pkt).to_pickle()
+def to_dict(pkt):
+    return Packet2Dict(pkt).to_dict()
 
 
-
-
-class Packet2Pickle:
+class Packet2Dict:
     def __init__(self, pkt):
         self.pkt = pkt
 
@@ -25,7 +23,7 @@ class Packet2Pickle:
         return {obj.name:d}
 
 
-    def _to_dict(self):
+    def to_dict(self):
         d = OrderedDict()
         pkt = self.pkt
         while True:
@@ -35,12 +33,6 @@ class Packet2Pickle:
             else:
                 pkt = pkt.payload
         return d
-
-
-
-    def to_pickle(self):
-        d = self._to_dict()
-        return pickle.dumps(d)
 
 
 
