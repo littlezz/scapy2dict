@@ -9,6 +9,6 @@ from scapy.all import sniff
 from scapy2dict import to_dict
 pkt = sniff(count=1)[0]
 
-# pickle dummps
+# To dict
 data = to_dict(pkt)
 ```
