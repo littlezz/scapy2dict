@@ -1,14 +1,14 @@
-# scapy2pickle
-Scapy packet to pickle
+# scapy2dict
+Scapy packet to dict
 
 Usage
 -----
 
 ```python
 from scapy.all import sniff
-from scapy2pickle import to_pickle
+from scapy2dict import to_dict
 pkt = sniff(count=1)[0]
 
 # pickle dummps
-data = to_pickle(pkt)
+data = to_dict(pkt)
 ```
