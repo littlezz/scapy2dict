@@ -4,6 +4,8 @@ from collections import OrderedDict
 
 __all__ = ['to_dict', 'Packet2Dict']
 
+__version__ = '0.9'
+
 
 def to_dict(pkt):
     return Packet2Dict(pkt).to_dict()

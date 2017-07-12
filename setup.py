@@ -5,6 +5,7 @@ from codecs import open
 from os import path
 
 here = path.abspath(path.dirname(__file__))
+version = __import__('scapy2dict').__version__
 
 # Get the long description from the README file
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -16,7 +17,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='1.2.0',
+    version=version,
 
     description='Scapy packet to dict',
     long_description=long_description,
@@ -26,7 +27,7 @@ setup(
 
     # Author details
     author='littlezz',
-    # author_email='pypa-dev@googlegroups.com',
+    author_email='zz.at.field@gmail.com',
 
     # Choose your license
     license='MIT',
