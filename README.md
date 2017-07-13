@@ -1,6 +1,12 @@
 # scapy2dict
 Scapy packet to dict
 
+
+install
+-------
+`pip3 install scapy2dict`  
+
+
 Usage
 -----
 
