@@ -1,14 +1,30 @@
-from scapy.packet import NoPayload
-from collections import OrderedDict
-
-
 __all__ = ['to_dict', 'Packet2Dict']
 
-__version__ = '0.9'
+
+__version__ = '0.10'
+
+
+_native_value = (int, float, str, bytes, bool, list, tuple, set, dict, type(None))
 
 
 def to_dict(pkt):
     return Packet2Dict(pkt).to_dict()
+
+
+def _layer2dict(obj):
+    d = {}
+
+    if not getattr(obj, 'fields_desc', None):
+        return
+    for f in obj.fields_desc:
+        value = getattr(obj, f.name)
+        if value is type(None):
+            value = None
+
+        if not isinstance(value, _native_value):
+            value = _layer2dict(value)
+        d[f.name] = value
+    return {obj.name: d}
 
 
 class Packet2Dict:
@@ -16,24 +32,17 @@ class Packet2Dict:
         self.pkt = pkt
 
 
-    @staticmethod
-    def _layer2dict(obj):
-        d = {}
-        for f in obj.fields_desc:
-            value = getattr(obj, f.name)
-            d[f.name] = value
-        return {obj.name:d}
-
-
     def to_dict(self):
-        d = OrderedDict()
-        pkt = self.pkt
+        d = list()
+        count = 0
+
         while True:
-            d.update(self._layer2dict(pkt))
-            if isinstance(pkt.payload, NoPayload):
+            layer = self.pkt.getlayer(count)
+            if not layer:
                 break
-            else:
-                pkt = pkt.payload
+            d.append(_layer2dict(layer))
+
+            count += 1
         return d
 
 
