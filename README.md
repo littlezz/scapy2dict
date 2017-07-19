@@ -15,6 +15,9 @@ from scapy.all import sniff
 from scapy2dict import to_dict
 pkt = sniff(count=1)[0]
 
-# To dict
+# To ChainMap dict
 data = to_dict(pkt)
+
+# to exactly dict
+data = to_dict(pkt, strict=True)
 ```
