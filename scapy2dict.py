@@ -1,14 +1,21 @@
+from collections import ChainMap
+
+
 __all__ = ['to_dict', 'Packet2Dict']
 
 
-__version__ = '0.10'
+__version__ = '0.11'
 
 
 _native_value = (int, float, str, bytes, bool, list, tuple, set, dict, type(None))
 
 
-def to_dict(pkt):
-    return Packet2Dict(pkt).to_dict()
+def to_dict(pkt, strict=False):
+    """
+    return ChainMap dict. if strict set to True, return dict.
+    """
+    d = Packet2Dict(pkt).to_dict()
+    return d if not strict else dict(**d)
 
 
 def _layer2dict(obj):
@@ -33,6 +40,10 @@ class Packet2Dict:
 
 
     def to_dict(self):
+        """
+        Turn every layer to dict, store in ChainMap type.
+        :return: ChainMaq
+        """
         d = list()
         count = 0
 
@@ -43,7 +54,7 @@ class Packet2Dict:
             d.append(_layer2dict(layer))
 
             count += 1
-        return d
+        return ChainMap(*d)
 
 
 
