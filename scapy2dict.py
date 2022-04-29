@@ -4,7 +4,7 @@ from collections import ChainMap
 __all__ = ['to_dict', 'Packet2Dict']
 
 
-__version__ = '0.11'
+__version__ = '0.12'
 
 
 _native_value = (int, float, str, bytes, bool, list, tuple, set, dict, type(None))
